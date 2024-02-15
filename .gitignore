@@ -1,0 +1,4 @@
+/__pycache__
+*.sql
+*.db
+!tab.sql
