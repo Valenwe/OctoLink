@@ -141,7 +141,11 @@ def process_page(con: Connection, url: str, max_depth: int, root_hostname: str, 
     try:
         # we use the request url in case of redirection
         web_header = get_header(url)
-        url = web_header["url"]
+
+        # if the header url is valid
+        if len(web_header["url"]) > 0 and root_hostname in web_header["url"]:
+            url = web_header["url"]
+
         depth = get_depth(url, root_hostname)
 
         # if the content is not html, no need to request it
@@ -157,7 +161,7 @@ def process_page(con: Connection, url: str, max_depth: int, root_hostname: str, 
         if session is None:
             session = requests.Session()
         web_response = get_content(url, session)
-    except (IndexError, UnicodeEncodeError, Timeout, InvalidSchema, InvalidURL, TooManyRedirects, requests.exceptions.ConnectionError) as e:
+    except (UnicodeEncodeError, Timeout, InvalidSchema, InvalidURL, TooManyRedirects, requests.exceptions.ConnectionError) as e:
         logging.info("[SKIPPING] Could not retrieve content from %s", url)
         logging.info(e)
         return

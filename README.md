@@ -39,7 +39,7 @@ The script will collect all unique absolute URLs from the specified website and 
 | -- | ---------------------------------------- | ----- | ------ |
 | 1  | http://localhost/test-intrusion.html     |   1   | 0      |
 | 2  | http://localhost/recruit.html            |   2   | 0      |
-| 3  | https://localhost/client/                |   2   | 1      |
+| 3  | https://localhost/client                 |   2   | 1      |
 ```
 
 ## Database Table Structure
